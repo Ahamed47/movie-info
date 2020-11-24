@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Info App</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand mb-0 h1" href="#">Movie's Now</a>
+      </nav>
+
+      <form id="movieForm" autocomplete="off">
+        <div class="form-group up">
+          <label for="Movie">Search for your favourite Movie's :</label>
+          <input
+            class="form-control"
+            type="text"
+            id="movie"
+            placeholder="Enter Movie Name..."
+          />
+        </div>
+        <div class="form-group up2">
+          <button class="btn btn-outline-secondary btn-dark btn-block">
+            Search Movie
+          </button>
+        </div>
+      </form>
+      <div id="result" class="down"></div>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var apikey = "fe51d124";
+
+      $("#movieForm").submit(function (event) {
+        event.preventDefault();
+
+        var movie = $("#movie").val();
+
+        var url = "http://www.omdbapi.com/?apikey=" + apikey;
+
+        $.ajax({
+          method: "GET",
+          url: url + "&t=" + movie,
+          success: function (data) {
+            console.log(data);
+
+            result = `
+            <img style="float:left" class="img-thumnail" width="200" height="200" src="${data.Poster}"/>
+            <h4 style="color:white">Movie Name : ${data.Title}</h4>
+            <h4 style="color:white">IMDB Rating : ${data.imdbRating}</h4>
+            <h5 style="color:white">Genre : ${data.Genre}</h5>
+            <h5 style="color:white">Director : ${data.Director}</h5>
+            <h5 style="color:white">Actors : ${data.Actors}</h5>
+            <h5 style="color:white">Release Date : ${data.Released}</h5>
+            <h5 style="color:white">Run Time : ${data.Runtime}</h5>
+            `;
+
+            $("#result").html(result);
+          },
+        });
+      });
+    });
+  </script>
+</html>

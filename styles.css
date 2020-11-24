@@ -1,0 +1,21 @@
+.btn {
+  color: #fff;
+}
+
+.up {
+  margin-top: 100px;
+}
+.up2 {
+  margin-top: 20px;
+}
+
+.down {
+  margin-top: 40px;
+}
+
+body {
+  background-image: url("image3.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
